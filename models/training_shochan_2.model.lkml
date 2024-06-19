@@ -24,6 +24,8 @@ explore: abc_analysis {}
 
 explore: basket {}
 
+explore: RFM {}
+
 explore: fact_sales {
   join: dimention_client {
     type: left_outer
@@ -72,4 +74,15 @@ explore: fact_sales {
     relationship: many_to_one
   }
 
+  join: RFM {
+  type: left_outer
+  sql_on: ${fact_sales.client_id} = ${RFM.client_id} ;;
+  relationship: many_to_one
+  }
+
+  join: decile {
+    type: left_outer
+    sql_on: ${fact_sales.client_id} = ${decile.client_id} ;;
+    relationship: many_to_one
+  }
 }
