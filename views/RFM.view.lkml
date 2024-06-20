@@ -123,5 +123,7 @@ view: RFM {
  dimension: rfm_segment {
   type: string
   sql: ${TABLE}."RFM_SEGMENT" ;;
+  html:
+  <a href='{{_explore._dashboard_url}}?Rfm_Segment={{value}}'>{{value}}</a>;;
   }
 }

@@ -16,7 +16,12 @@ view: dimention_item {
   dimension: item_name {
     type: string
     sql: ${TABLE}."ITEM_NAME" ;;
+   html:
+    <a href='{{_explore._dashboard_url}}?商品名ごと={{value}}'>{{value}}</a>;;
   }
+  #html:
+  #<a href='{{_explore._dashboard_url}}?Rfm+Segment={{value}}&Item+Category+Medium={{value}}&県ごと={{value}}&商品名ごと={{value}}&月ごと={{value}}'>{{value}}</a>;;
+
   measure: count {
     type: count
     drill_fields: [item_name, brand_name]

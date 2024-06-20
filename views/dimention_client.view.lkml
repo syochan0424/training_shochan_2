@@ -31,6 +31,10 @@ view: dimention_client {
   dimension: iclient_prefecture {
     type: string
     sql: ${TABLE}."ICLIENT_PREFECTURE" ;;
+    link: {
+      label: "View Details"
+      url: "{{_explore._dashboard_url}}?Rfm+Segment=&Item+Category+Medium=&県ごと={{value}}&商品名ごと=&月ごと="
+    }
   }
 
   dimension: age {

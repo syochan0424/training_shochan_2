@@ -5,7 +5,7 @@ view: basket {
       a.item_name AS item_name_1,
       b.item_name AS item_name_2,
       fs1.item_code AS item_code_1,
-      COUNT(*) AS cooccurrence_count
+      COUNT(fs1.item_code) AS cooccurrence_count
     FROM
       "TRAINING_SISENSE"."FACT_SALES" fs1
     JOIN
@@ -26,6 +26,7 @@ view: basket {
       item_name_1, item_name_2, item_code_1
     ORDER BY
       cooccurrence_count DESC
+    limit 44
     ;;
   }
 
@@ -42,7 +43,13 @@ view: basket {
   dimension: item_name_2 {
     type: string
     sql: ${TABLE}.item_name_2 ;;
+    link: {
+      label: "商品ごとフィルター"
+      url: "{{_explore._dashboard_url}}?Rfm+Segment=&Item+Category+Medium=&県ごと=&商品名ごと={{value}}&月ごと="
+    }
   }
+
+
 
   measure: cooccurrence_count {
     type: sum

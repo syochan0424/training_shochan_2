@@ -35,6 +35,10 @@ view: fact_sales {
   measure: total_sales_amount {
     type: sum
     sql: ${TABLE}."SALE_AMOUNT" ;;
+    link: {
+      label: "商品ごとフィルター"
+      url: "{{_explore._dashboard_url}}?Rfm+Segment=&Item+Category+Medium=&県ごと=&商品名ごと={{value}}&月ごと="
+    }
     value_format: "#,##0;-(#,##0)"
   }
 
@@ -56,7 +60,8 @@ view: fact_sales {
   dimension: sale_month {
     type: string
     sql: DATE_TRUNC('MONTH', TO_DATE(${TABLE}."SALE_DATE", 'YYYY/MM/DD')) ;;
-    description: "月ごとのフィルター用フィールド"
+    html:
+    <a href='{{_explore._dashboard_url}}?月ごと={{value}}'>{{value}}</a>;;
   }
 
   dimension: sale_year {

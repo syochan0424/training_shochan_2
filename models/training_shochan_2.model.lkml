@@ -26,6 +26,8 @@ explore: basket {}
 
 explore: RFM {}
 
+explore: basket_top_ten {}
+
 explore: fact_sales {
   join: dimention_client {
     type: left_outer
