@@ -49,8 +49,6 @@ view: basket {
     }
   }
 
-
-
   measure: cooccurrence_count {
     type: sum
     sql: ${TABLE}.cooccurrence_count ;;

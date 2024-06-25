@@ -126,4 +126,7 @@ view: RFM {
   html:
   <a href='{{_explore._dashboard_url}}?Rfm_Segment={{value}}'>{{value}}</a>;;
   }
+
+
+
 }

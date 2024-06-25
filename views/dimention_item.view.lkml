@@ -16,12 +16,11 @@ view: dimention_item {
   dimension: item_name {
     type: string
     sql: ${TABLE}."ITEM_NAME" ;;
-   html:
-    <a href='{{_explore._dashboard_url}}?商品名ごと={{value}}'>{{value}}</a>;;
+  #  link: {
+  #    label: "商品ごとフィルター"
+  #    url: "https://insightlabpartner.jp.looker.com/dashboards/62?顧客指標={{ _filters['RFM.rfm_segment'] | url_encode }}&商品中分類={{ _filters['dimention_item_category.item_category_medium'] | url_encode }}&県ごと=&商品名ごと={{ value | url_encode }}&月ごと="
+  #  }
   }
-  #html:
-  #<a href='{{_explore._dashboard_url}}?Rfm+Segment={{value}}&Item+Category+Medium={{value}}&県ごと={{value}}&商品名ごと={{value}}&月ごと={{value}}'>{{value}}</a>;;
-
   measure: count {
     type: count
     drill_fields: [item_name, brand_name]

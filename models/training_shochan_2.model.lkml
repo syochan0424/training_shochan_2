@@ -26,7 +26,9 @@ explore: basket {}
 
 explore: RFM {}
 
-explore: basket_top_ten {}
+explore: basket_top_ten {
+  sql_always_where:  ;;
+}
 
 explore: fact_sales {
   join: dimention_client {
