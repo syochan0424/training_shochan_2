@@ -1,33 +1,35 @@
-view: basket {
+view:basket{
   derived_table: {
     sql:
-    SELECT
-      a.item_name AS item_name_1,
-      b.item_name AS item_name_2,
-      fs1.item_code AS item_code_1,
-      COUNT(fs1.item_code) AS cooccurrence_count
-    FROM
-      "TRAINING_SISENSE"."FACT_SALES" fs1
-    JOIN
-      "TRAINING_SISENSE"."FACT_SALES" fs2
-      ON fs1.client_id = fs2.client_id
-      AND fs1.sale_date = fs2.sale_date
-      AND fs1.item_code != fs2.item_code
-      AND fs1.item_code < fs2.item_code
-    JOIN
-      "TRAINING_SISENSE"."DIMENTION_ITEM" a
-      ON fs1.item_code = a.item_code
-    JOIN
-      "TRAINING_SISENSE"."DIMENTION_ITEM" b
-      ON fs2.item_code = b.item_code
-    WHERE
-      a.item_name = {% parameter selected_item %} -- フィルターで指定された商品名
-    GROUP BY
-      item_name_1, item_name_2, item_code_1
-    ORDER BY
-      cooccurrence_count DESC
-    limit 44
+      SELECT
+        a.item_name AS item_name_1,
+        b.item_name AS item_name_2,
+        fs1.item_code AS item_code_1,
+        COUNT(fs1.item_code) AS cooccurrence_count
+      FROM
+        "TRAINING_SISENSE"."FACT_SALES" fs1
+      JOIN
+        "TRAINING_SISENSE"."FACT_SALES" fs2
+        ON fs1.client_id = fs2.client_id
+        AND fs1.sale_date = fs2.sale_date
+        AND fs1.item_code != fs2.item_code
+        AND fs1.item_code < fs2.item_code
+      JOIN
+        "TRAINING_SISENSE"."DIMENTION_ITEM" a
+        ON fs1.item_code = a.item_code
+      JOIN
+        "TRAINING_SISENSE"."DIMENTION_ITEM" b
+        ON fs2.item_code = b.item_code
+      WHERE
+        a.item_name = {% parameter selected_item %} -- フィルターで指定された商品名
+      GROUP BY
+        item_name_1, item_name_2, item_code_1
     ;;
+  }
+
+  dimension: client_id {
+    type: number
+    sql: ${TABLE}.client_id ;;
   }
 
   dimension: item_code {

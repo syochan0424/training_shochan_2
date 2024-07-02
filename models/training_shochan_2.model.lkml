@@ -10,25 +10,21 @@ datagroup: training_shochan_2_default_datagroup {
 
 persist_with: training_shochan_2_default_datagroup
 
-explore: dimention_client {}
+#explore: dimention_client {}
 
-explore: dimention_item {}
+#explore: dimention_item {}
 
-explore: dimention_item_category {}
+#explore: dimention_item_category {}
 
-explore: dimention_location {}
+#explore: dimention_location {}
 
-explore: dimention_shop {}
+#explore: dimention_shop {}
 
-explore: abc_analysis {}
+#explore: abc_analysis {}
+
+#explore: RFM {}
 
 explore: basket {}
-
-explore: RFM {}
-
-explore: basket_top_ten {
-  sql_always_where:  ;;
-}
 
 explore: fact_sales {
   join: dimention_client {
@@ -46,6 +42,18 @@ explore: fact_sales {
   join: dimention_item_category {
     type: left_outer
     sql_on: ${dimention_item.item_category_code} = ${dimention_item_category.item_category_code} ;;
+    relationship: many_to_one
+  }
+
+  join: RFM {
+  type: left_outer
+  sql_on: ${fact_sales.client_id} = ${RFM.client_id} ;;
+  relationship: many_to_one
+  }
+
+  join: basket {
+    type: left_outer
+    sql_on: ${fact_sales.item_code} = ${basket.item_code} ;;
     relationship: many_to_one
   }
 
@@ -72,21 +80,10 @@ explore: fact_sales {
     relationship: many_to_one
   }
 
-  join: basket {
-    type: left_outer
-    sql_on: ${fact_sales.item_code} = ${basket.item_code} ;;
-    relationship: many_to_one
-  }
-
-  join: RFM {
-  type: left_outer
-  sql_on: ${fact_sales.client_id} = ${RFM.client_id} ;;
-  relationship: many_to_one
-  }
-
   join: decile {
     type: left_outer
     sql_on: ${fact_sales.client_id} = ${decile.client_id} ;;
     relationship: many_to_one
   }
 }
+explore: basket_top_ten {}

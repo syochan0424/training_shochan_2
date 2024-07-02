@@ -32,8 +32,8 @@ view: dimention_client {
     type: string
     sql: ${TABLE}."ICLIENT_PREFECTURE" ;;
     link: {
-      label: "View Details"
-      url: "{{_explore._dashboard_url}}?Rfm+Segment=&Item+Category+Medium=&県ごと={{value}}&商品名ごと=&月ごと="
+      label: "県ごとフィルター"
+      url: "https://insightlabpartner.jp.looker.com/dashboards/62?顧客指標={{ _filters['RFM.rfm_segment'] | url_encode }}&商品中分類={{ _filters['dimention_item_category.item_category_medium'] | url_encode }}&県ごと={{ value | url_encode }}&商品名ごと={{ dimention_item.item_name | url_encode }}&月ごと={{ _filters['fact_sales.sale_month'] | url_encode }}"
     }
   }
 

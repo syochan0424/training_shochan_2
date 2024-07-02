@@ -123,8 +123,12 @@ view: RFM {
  dimension: rfm_segment {
   type: string
   sql: ${TABLE}."RFM_SEGMENT" ;;
-  html:
-  <a href='{{_explore._dashboard_url}}?Rfm_Segment={{value}}'>{{value}}</a>;;
+  #link: {
+  #  label: "顧客指標フィルター"
+  #  url: "https://insightlabpartner.jp.looker.com/dashboards/62?顧客指標={{ value | url_encode }}&商品中分類={{ _filters['dimention_item_category.item_category_medium'] | url_encode }}&県ごと={{ ['dimention_client.iclient_prefecture'] | url_encode }}&商品名ごと={{ dimention_item.item_name | url_encode }}&月ごと={{ _filters['fact_sales.sale_month'] | url_encode }}"
+  #}
+  #html:
+  #<a href='{{_explore._dashboard_url}}?Rfm_Segment={{value}}'>{{value}}</a>;;
   }
 
 
